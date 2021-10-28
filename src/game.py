@@ -1,15 +1,22 @@
 import sys
-from asciimatics.effects import Cycle, Stars, Print, Sprite
+from asciimatics.effects import Background, Cycle, Stars, Print, Sprite
 from asciimatics.renderers import FigletText, Box, StaticRenderer, SpeechBubble
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
 from asciimatics.exceptions import ResizeScreenError
 from asciimatics.paths import DynamicPath
 from asciimatics.event import KeyboardEvent, MouseEvent
+import evaluator
 
 symbol_placer = None
 current_turn = 0
 bigBoxLength = 0
+
+board_vals =["","","",
+            "","","",
+            "","",""]
+
+winner = ""
 
 class MouseController(DynamicPath):
     def __init__(self, sprite, scene, x, y):
@@ -41,38 +48,59 @@ class SymbolPlacer(Sprite):
             colour=Screen.COLOUR_RED)
 
     def place_symbol(self, message):
+        global board_vals
+
         x, y = self._path.next_pos()
         symbolX, symbolY = 0, 0
         boxOriginX = int(self._screen.width / 2 - bigBoxLength / 2 * 2)
         boxOriginY = int(self._screen.height / 2 - bigBoxLength / 2)
         validPos = True
+
+        this_turn_board_row = 0
+        this_turn_board_col = 0
         if x > boxOriginX and x < boxOriginX + bigBoxLength * 2:
             if x < int(boxOriginX + bigBoxLength / 3 * 2):
+                this_turn_board_col = 0
                 symbolX = int(boxOriginX + bigBoxLength / 6 * 2)
             elif x > int(boxOriginX + bigBoxLength * 2 / 3 * 2):
+                this_turn_board_col = 2
                 symbolX = int(boxOriginX + bigBoxLength * 5 / 6 * 2)
             else:
+                this_turn_board_col = 1
                 symbolX = int(boxOriginX + bigBoxLength / 2 * 2)
         else:
             validPos = False
         
         if y > boxOriginY and y < boxOriginY + bigBoxLength:
             if y < int(boxOriginY + bigBoxLength / 3):
+                this_turn_board_row = 0
                 symbolY = int(boxOriginY + bigBoxLength / 6)
             elif y > int(boxOriginY + bigBoxLength * 2 / 3):
+                this_turn_board_row = 2
                 symbolY = int(boxOriginY + bigBoxLength * 5 / 6)
             else:
+                this_turn_board_row = 1
                 symbolY = int(boxOriginY + bigBoxLength / 2)
         else:
             validPos = False
 
-        if validPos:
+        selected_square = 3 * (this_turn_board_row) + this_turn_board_col
+        if validPos and board_vals[selected_square] == "":
+            global current_turn, winner
+            current_turn = current_turn + 1
+            thisTurnSymbol = "O" if current_turn % 2 == 0 else "X",
             self._scene.add_effect(Print(self._screen,
-                FigletText("O"),
+                FigletText(thisTurnSymbol),
                 symbolY-4, symbolX-2))
+                
+            board_vals[selected_square] = thisTurnSymbol
+            winner = evaluator.get_winner(board_vals, selected_square)
+            self._scene.add_effect(Print(self._screen,
+                FigletText(winner),
+                0, 0))
 
 def demo(screen):
-    global symbol_placer, bigBoxLength
+    global symbol_placer, bigBoxLength, winner
     symbol_placer = SymbolPlacer(screen)
     bigBoxLength = int(screen.width / 4 * 3) if screen.width < screen.height else int(screen.height / 4 * 3)
     effects = [

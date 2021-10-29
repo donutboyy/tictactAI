@@ -23,5 +23,5 @@ def test_cannot_replace_symbol_with_symbol():
     assert board.view_board()[1] == "X"
 
 def test_exception_when_attempt_to_place_symbol_out_of_board_index_range():
-    with pytest.raises(Exception) as e_info:
+    with pytest.raises(Exception):
         board.place_symbol(10, "X")

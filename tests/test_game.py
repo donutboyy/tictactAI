@@ -35,3 +35,36 @@ def test_player_cannot_go_twice_in_a_row():
 def test_exception_when_attempt_to_place_symbol_out_of_board_index_range():
     with pytest.raises(Exception):
         game.player_turn(10)
+
+def test_player_can_fill_row():
+    game.player_turn(0)
+    game.player_turn(8)
+    game.player_turn(1)
+    game.player_turn(7)
+    game.player_turn(2)
+    assert game.board.view_board()[0] == "X" and game.board.view_board()[
+        1] == "X" and game.board.view_board()[2] == "X"
+
+def test_player_wins_by_row_of_three():
+    game.player_turn(3)
+    game.player_turn(8)
+    game.player_turn(4)
+    game.player_turn(7)
+    game.player_turn(5)
+    assert game.check_row_win() == "X"
+
+def test_player_wins_by_col_of_three():
+    game.player_turn(0)
+    game.player_turn(8)
+    game.player_turn(3)
+    game.player_turn(7)
+    game.player_turn(6)
+    assert game.check_col_win() == "X"
+
+def test_player_wins_by_diagonal():
+    game.player_turn(0)
+    game.player_turn(2)
+    game.player_turn(4)
+    game.player_turn(7)
+    game.player_turn(8)
+    assert game.check_diagonal_win() == "X"

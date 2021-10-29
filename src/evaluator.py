@@ -7,48 +7,57 @@ def get_winner(board, square) -> str:
 def has_winner(board) -> bool:
     return get_winner(board) != ""
 
-def check_row_win(board, square) -> str:
-    '''x_count = 0
+def check_row_win(board, index=0) -> str:
+    x_count = 0
     o_count = 0
     winner = ""
 
-    for row in range(len(board)):
+    for row in range(3):
         x_count = 0
         o_count = 0
 
-        for col in range(len(board[0])):
-            if board[row][col] == "X":
-                x_count += 1
-            elif board[row][col] == "O":
+        for col in range(3):
+            if board[row * 3 + col] == "X":
+                x_count +=  1
+            elif board[row * 3 + col] == "O":
                 o_count += 1
             if x_count == 3: 
                 winner = "X"
             elif o_count == 3: 
                 winner = "O"
     
-    return winner'''
-    # check the row
-    row_ind = math.floor(square / 3)
-    row = board[row_ind*3:(row_ind+1)*3]
-    # print('row', row)
-    if all([s == "X" for s in row]):
-        return "X"
-    if all([s == "O" for s in row]):
-        return "O"
-    return ""
+    return winner
 
 def check_col_win(board) -> str:
-    for row in board:
+    x_count = 0
+    o_count = 0
+    winner = ""
+
+    for col in range(3):
         x_count = 0
         o_count = 0
 
-        for col in row:
-            if col == "X":
+        for row in range(3):
+            if board[row * 3 + col] == "X":
                 x_count += 1
-            elif col == "O":
+            elif board[row * 3 + col] == "O":
                 o_count += 1
+            if x_count == 3:
+                winner = "X"
+            elif o_count == 3:
+                winner = "O"
+
+    return winner
         
-        if x_count == 3: return "X"
-        elif o_count == 3: return "O"
-        else: return ""
-        
+def check_diagonal_win(board) -> str:
+    if board[0] == "X" and board[4] == "X" and board[8] == "X":
+        return "X"
+    elif board[0] == "O" and board[4] == "O" and board[8] == "O":
+        return "O"
+    elif board[2] == "X" and board[4] == "X" and board[6] == "X":
+        return "X"
+    elif board[2] == "O" and board[4] == "O" and board[6] == "O":
+        return "O"
+
+    return ""
+    

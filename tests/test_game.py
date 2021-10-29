@@ -51,7 +51,7 @@ def test_player_wins_by_row_of_three():
     game.player_turn(4)
     game.player_turn(7)
     game.player_turn(5)
-    assert game.check_row_win() == "X"
+    assert game.check_win() == "X"
 
 def test_player_wins_by_col_of_three():
     game.player_turn(0)
@@ -59,7 +59,7 @@ def test_player_wins_by_col_of_three():
     game.player_turn(3)
     game.player_turn(7)
     game.player_turn(6)
-    assert game.check_col_win() == "X"
+    assert game.check_win() == "X"
 
 def test_player_wins_by_diagonal():
     game.player_turn(0)
@@ -67,4 +67,4 @@ def test_player_wins_by_diagonal():
     game.player_turn(4)
     game.player_turn(7)
     game.player_turn(8)
-    assert game.check_diagonal_win() == "X"
+    assert game.check_win() == "X"

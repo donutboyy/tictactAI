@@ -11,7 +11,7 @@ def test_init():
     board = Board()
 
 def test_starts_empty():
-    assert all(x is "" for x in board.view_board())
+    assert all(x == "" for x in board.view_board())
 
 def test_can_place_symbol_on_board():
     board.place_symbol(1, "X")

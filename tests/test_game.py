@@ -68,3 +68,11 @@ def test_player_wins_by_diagonal():
     game.player_turn(7)
     game.player_turn(8)
     assert game.check_win() == "X"
+
+def test_if_there_is_winner_then_game_over_is_true():
+    game.player_turn(0)
+    game.player_turn(2)
+    game.player_turn(4)
+    game.player_turn(7)
+    game.player_turn(8)
+    assert game.check_win() != "" and game.get_game_over()

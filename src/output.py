@@ -7,16 +7,13 @@ from asciimatics.exceptions import ResizeScreenError
 from asciimatics.paths import DynamicPath
 from asciimatics.event import KeyboardEvent, MouseEvent
 import evaluator
+from game import *
 
 symbol_placer = None
 current_turn = 0
 bigBoxLength = 0
 
-board_vals =["","","",
-            "","","",
-            "","",""]
-
-winner = ""
+game = Game()
 
 class MouseController(DynamicPath):
     def __init__(self, sprite, scene, x, y):
@@ -29,7 +26,7 @@ class MouseController(DynamicPath):
             self._y = event.y
             if event.buttons & MouseEvent.LEFT_CLICK != 0:
                 # Try to whack the other sprites when mouse is clicked
-                self._sprite.place_symbol(str(self._x) + " " + str(self._y))
+                self._sprite.place_symbol()
         else:
             return event
 
@@ -47,8 +44,11 @@ class SymbolPlacer(Sprite):
                 self, screen, screen.width // 2, screen.height // 2),
             colour=Screen.COLOUR_RED)
 
-    def place_symbol(self, message):
+    def place_symbol(self):
         global board_vals
+
+        if game.get_game_over():
+            return
 
         x, y = self._path.next_pos()
         symbolX, symbolY = 0, 0
@@ -85,22 +85,19 @@ class SymbolPlacer(Sprite):
             validPos = False
 
         selected_square = 3 * (this_turn_board_row) + this_turn_board_col
-        if validPos and board_vals[selected_square] == "":
-            global current_turn, winner
-            current_turn = current_turn + 1
-            thisTurnSymbol = "O" if current_turn % 2 == 0 else "X",
+        if validPos and game.player_turn(selected_square):
             self._scene.add_effect(Print(self._screen,
-                FigletText(thisTurnSymbol),
+                FigletText(game.get_current_player().get_symbol()),
                 symbolY-4, symbolX-2))
-                
-            board_vals[selected_square] = thisTurnSymbol
-            winner = evaluator.get_winner(board_vals, selected_square)
+
+        if game.check_win() != "":
             self._scene.add_effect(Print(self._screen,
-                FigletText(winner),
-                0, 0))
+            FigletText("Winner is: " + str(game.check_win())),
+            int(bigBoxLength * 9 / 8), transparent=False))
+
 
 def demo(screen):
-    global symbol_placer, bigBoxLength, winner
+    global symbol_placer, bigBoxLength
     symbol_placer = SymbolPlacer(screen)
     bigBoxLength = int(screen.width / 4 * 3) if screen.width < screen.height else int(screen.height / 4 * 3)
     effects = [

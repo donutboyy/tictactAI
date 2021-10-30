@@ -9,6 +9,7 @@ class Game():
         self.board = Board()
         self.__turn_counter = 0
         self.__current_player = playerX
+        self.__game_over = False
 
     def get_turn(self) -> int:
         return self.__turn_counter
@@ -22,17 +23,24 @@ class Game():
         self.__turn_counter += 1 if successfully_place_symbol else 0
         return successfully_place_symbol
         
+    def get_game_over(self) -> bool:
+        return self.__game_over
+
     def check_win(self) -> str:
         row_winner = evaluator.check_row_win(self.board.view_board())
         col_winner = evaluator.check_col_win(self.board.view_board())
         diagonal_winner = evaluator.check_diagonal_win(self.board.view_board())
         if not row_winner == "":
+            self.__game_over = True
             return row_winner
         elif not col_winner == "":
+            self.__game_over = True
             return col_winner
         elif not diagonal_winner == "":
+            self.__game_over = True
             return diagonal_winner
         else:
+            self.__game_over = False
             return ""
 
     

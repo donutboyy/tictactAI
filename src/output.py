@@ -1,3 +1,4 @@
+from re import I
 import sys
 from asciimatics.effects import Background, Cycle, Stars, Print, Sprite
 from asciimatics.renderers import FigletText, Box, StaticRenderer, SpeechBubble
@@ -8,12 +9,13 @@ from asciimatics.paths import DynamicPath
 from asciimatics.event import KeyboardEvent, MouseEvent
 import evaluator
 from game import *
+import ai_player
 
 symbol_placer = None
 current_turn = 0
 bigBoxLength = 0
 
-game = Game()
+game = Game(playerO = ai_player.AI_Player())
 
 class MouseController(DynamicPath):
     def __init__(self, sprite, scene, x, y):
@@ -86,14 +88,49 @@ class SymbolPlacer(Sprite):
 
         selected_square = 3 * (this_turn_board_row) + this_turn_board_col
         if validPos and game.player_turn(selected_square):
-            self._scene.add_effect(Print(self._screen,
-                FigletText(game.get_current_player().get_symbol()),
-                symbolY-4, symbolX-2))
+            if not game.get_game_over():
+                game.ai_player_turn()
+
+            self.print_board()
 
         if game.check_win() != "":
             self._scene.add_effect(Print(self._screen,
             FigletText("Winner is: " + str(game.check_win())),
             int(bigBoxLength * 9 / 8), transparent=False))
+        elif game.get_game_over():
+            self._scene.add_effect(Print(self._screen,
+            FigletText("Nobody wins"),
+            int(bigBoxLength * 9 / 8), transparent=False))
+
+    def print_board(self):
+        boxOriginX = int(self._screen.width / 2 - bigBoxLength / 2 * 2)
+        boxOriginY = int(self._screen.height / 2 - bigBoxLength / 2)
+        symbolX, symbolY = 0, 0
+
+        for i in range(9):
+            # get screen pos of col
+            if i % 3 == 0:
+                symbolX = int(boxOriginX + bigBoxLength / 6 * 2)
+            elif i % 3 == 1:
+                symbolX = int(boxOriginX + bigBoxLength / 2 * 2)
+            elif i % 3 == 2:
+                symbolX = int(boxOriginX + bigBoxLength * 5 / 6 * 2)
+
+            # get screen pos of row
+            if i / 3 == 0:
+                symbolY = int(boxOriginY + bigBoxLength / 6)
+            elif i / 3 == 1:
+                symbolY = int(boxOriginY + bigBoxLength / 2)
+            elif i / 3 == 2:
+                symbolY = int(boxOriginY + bigBoxLength * 5 / 6)
+
+            self._scene.add_effect(Print(self._screen,
+                FigletText(game.board.view_board()[i]),
+                symbolY-4, symbolX-2))
+        
+        
+
+        
 
 
 def demo(screen):

@@ -1,13 +1,29 @@
 
 import math
 
-def get_winner(board, square) -> str:
-    return check_row_win(board, square)
+def get_winner(board) -> str:
+    row_winner = check_row_win(board)
+    col_winner = check_col_win(board)
+    diagonal_winner = check_diagonal_win(board)
+    if not row_winner == "":
+        return row_winner
+    elif not col_winner == "":
+        return col_winner
+    elif not diagonal_winner == "":
+        return diagonal_winner
+    else:
+        return ""
 
 def has_winner(board) -> bool:
     return get_winner(board) != ""
 
-def check_row_win(board, index=0) -> str:
+def has_draw(board) -> bool:
+    if not has_winner(board) and "" not in board:
+        return True
+    else: 
+        return False
+
+def check_row_win(board) -> str:
     x_count = 0
     o_count = 0
     winner = ""
@@ -61,3 +77,7 @@ def check_diagonal_win(board) -> str:
 
     return ""
     
+# X is maximizer, O is minimizer
+def evaluate_board(board) -> int:
+    if get_winner(board) == "X": return 10
+    elif get_winner(board) == "O": return -10

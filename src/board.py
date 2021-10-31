@@ -17,5 +17,14 @@ class Board():
         else:
             return False
 
+    def set_board(self, boardList):
+        self.__board = boardList
+
+    def remove_symbol(self, index) -> bool:
+        if not self.__board[index] == "":
+            self.__board[index] = ""
+            return True
+        else:
+            return False
 
     

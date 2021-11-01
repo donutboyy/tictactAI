@@ -1,3 +1,4 @@
+from re import I
 import sys
 from asciimatics.effects import Background, Cycle, Stars, Print, Sprite
 from asciimatics.renderers import FigletText, Box, StaticRenderer, SpeechBubble

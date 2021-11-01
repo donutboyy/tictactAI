@@ -1,5 +1,4 @@
 from player import *
-from ai_player import *
 import evaluator
 
 class Game():
@@ -27,14 +26,6 @@ class Game():
             return successfully_place_symbol
         else: return False
         
-    def ai_player_turn(self) -> int:
-        if not self.__game_over:
-            self.__current_player = self.playerX if self.__turn_counter % 2 == 0 else self.playerO
-            bestMove = self.playerO.place_symbol_on_board(self.board)
-            self.__turn_counter += 1
-            self.__game_over = evaluator.has_winner(self.board.view_board()) or evaluator.has_draw(self.board.view_board())
-            return bestMove
-
     def get_game_over(self) -> bool:
         return self.__game_over
 

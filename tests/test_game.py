@@ -76,15 +76,3 @@ def test_if_there_is_winner_then_game_over_is_true():
     game.player_turn(7)
     game.player_turn(8)
     assert game.check_win() != "" and game.get_game_over()
-
-def test_game_over_when_draw():
-    game.player_turn(0)
-    game.player_turn(1)
-    game.player_turn(3)
-    game.player_turn(4)
-    game.player_turn(7)
-    game.player_turn(6)
-    game.player_turn(2)
-    game.player_turn(5)
-    game.player_turn(8)
-    assert game.get_game_over() and game.check_win() == ""

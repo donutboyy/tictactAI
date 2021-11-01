@@ -7,7 +7,8 @@ class Board():
                         "", "", ""]
                         
     def view_board(self) -> List[str]:
-        return self.__board.copy()
+        temp_board = self.__board
+        return temp_board
     
     def place_symbol(self, index, symbol) -> bool:
         if self.__board[index] == "":
@@ -26,5 +27,4 @@ class Board():
         else:
             return False
 
-    def __str__(self):
-        return self.__board.__str__()
+    

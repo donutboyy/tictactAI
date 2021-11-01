@@ -178,4 +178,3 @@ def get_best_move(boardObj, isMaximizingPlayer) -> int:
                     bestMove = i
 
         return bestMove
-    

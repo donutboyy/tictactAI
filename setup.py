@@ -24,7 +24,7 @@ setup(
     python_requires='>=3.7',
     classifiers=[
     'Development Status :: 5 - Production/Stable',
-    'Topic :: Software Development :: Fun',
+    'Topic :: Games/Entertainment :: Board Games',
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.7',

@@ -9,7 +9,7 @@ from os.path import splitext
 setup(
     name='tictactai',
     version='1.0',
-    license='MIT License',
+    license='MIT',
     description='Play tic tac toe with an AI',
     author='Daniel Ng',
     author_email='dndanielng@gmail.com',
@@ -19,7 +19,16 @@ setup(
     py_modules=[splitext(basename(path))[0] for path in glob('*.py')],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
+    keywords=['tui', 'tictactoe', 'minimax'],
     python_requires='>=3.7',
+    classifiers=[
+    'Development Status :: 5 - Production/Stable',
+    'Topic :: Software Development :: Fun',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.9',
+    ],
     install_requires=[
         'Click',
         'asciimatics==1.13.0',

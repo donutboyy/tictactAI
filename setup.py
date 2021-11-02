@@ -6,10 +6,15 @@ from os.path import dirname
 from os.path import join
 from os.path import splitext
 
+readme = open('README.md', 'r')
+README_TEXT = readme.read()
+readme.close()
+
 setup(
     name='tictactai',
     version='1.0',
     license='MIT',
+    long_description=README_TEXT,
     description='Play tic tac toe with an AI',
     author='Daniel Ng',
     author_email='dndanielng@gmail.com',

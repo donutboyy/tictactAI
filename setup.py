@@ -37,6 +37,6 @@ setup(
         'zipp',
     ],entry_points='''
         [console_scripts]
-        tictactai=tictactai.tictactai:begin
+        tictactai=tictactai.tictactai:cli
     '''
 )

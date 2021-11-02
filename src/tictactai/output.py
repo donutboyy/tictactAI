@@ -12,8 +12,9 @@ from .ai_player import *
 symbol_placer = None
 current_turn = 0
 bigBoxLength = 0
+pvp = False
 
-game = Game(playerO = AI_Player())
+game = None
 
 class MouseController(DynamicPath):
     def __init__(self, sprite, scene, x, y):
@@ -45,7 +46,7 @@ class SymbolPlacer(Sprite):
             colour=Screen.COLOUR_RED)
 
     def place_symbol(self):
-        global board_vals
+        global pvp
 
         if game.get_game_over():
             return
@@ -80,7 +81,7 @@ class SymbolPlacer(Sprite):
 
         selected_square = 3 * (this_turn_board_row) + this_turn_board_col
         if validPos and game.player_turn(selected_square):
-            if not game.get_game_over():
+            if not game.get_game_over() and not pvp:
                 game.ai_player_turn()
 
             self.print_board()
@@ -145,7 +146,10 @@ if __name__ == "__main__":
         except ResizeScreenError:
             pass
 
-def start():
+def start(isPvp):
+    global pvp, game 
+    pvp = isPvp
+    game = Game(playerO = AI_Player()) if not pvp else Game()
     while True:
         try:
             Screen.wrapper(demo)

@@ -12,7 +12,7 @@ readme.close()
 
 setup(
     name='tictactai',
-    version='1.0',
+    version='1.0.1',
     license='MIT',
     long_description=README_TEXT,
     description='Play tic tac toe with an AI',

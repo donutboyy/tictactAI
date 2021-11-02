@@ -9,14 +9,17 @@ from os.path import splitext
 setup(
     name='tictactai',
     version='1.0',
+    license='MIT License',
     description='Play tic tac toe with an AI',
     author='Daniel Ng',
     author_email='dndanielng@gmail.com',
+    url='https://github.com/donutboy929/tictactAI',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob('*.py')],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
+    python_requires='>=3.7',
     install_requires=[
         'Click',
         'asciimatics==1.13.0',

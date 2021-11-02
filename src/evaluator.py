@@ -86,7 +86,7 @@ def evaluate_board(board) -> int:
     elif has_draw(board): return 0
 
 # considers all possible game outcomes and returns the value of the board
-def minimax(boardObj, isMaximizingPlayer, depth=0):
+def minimax(boardObj, isMaximizingPlayer, depth=0, alpha=-1000, beta=1000):
     score = evaluate_board(boardObj.view_board())
 
     # game ended with winner
@@ -109,10 +109,15 @@ def minimax(boardObj, isMaximizingPlayer, depth=0):
                 boardObj.place_symbol(i, "X")
 
                 #replace best value by calling minimax recursively on subsequent moves after this one
-                bestVal = max(bestVal, minimax(boardObj, not isMaximizingPlayer, depth+1))
+                bestVal = max(bestVal, minimax(boardObj, not isMaximizingPlayer, depth+1, alpha, beta))
+                alpha = max(alpha, bestVal)
                 
                 #reverse move
                 boardObj.remove_symbol(i)
+
+                #alpha-beta pruning
+                if beta <= alpha:
+                    break
 
         return bestVal
 
@@ -126,10 +131,15 @@ def minimax(boardObj, isMaximizingPlayer, depth=0):
                 boardObj.place_symbol(i, "O")
 
                 #replace best value by calling minimax recursively on subsequent moves after this one
-                bestVal = min(bestVal, minimax(boardObj, not isMaximizingPlayer, depth+1))
+                bestVal = min(bestVal, minimax(boardObj, not isMaximizingPlayer, depth+1, alpha, beta))
+                beta = min(beta, bestVal)
                 
                 #reverse move
                 boardObj.remove_symbol(i)
+
+                #alpha-beta pruning
+                if beta <= alpha:
+                    break
 
         return bestVal
 

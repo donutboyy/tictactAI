@@ -1,4 +1,4 @@
-from board import *
+from .board import *
 
 class Player():
     def __init__(self, symbol="X"):

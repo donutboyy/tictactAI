@@ -6,15 +6,14 @@ from asciimatics.screen import Screen
 from asciimatics.exceptions import ResizeScreenError
 from asciimatics.paths import DynamicPath
 from asciimatics.event import KeyboardEvent, MouseEvent
-import evaluator
-from game import *
-import ai_player
+from .game import *
+from .ai_player import *
 
 symbol_placer = None
 current_turn = 0
 bigBoxLength = 0
 
-game = Game(playerO = ai_player.AI_Player())
+game = Game(playerO = AI_Player())
 
 class MouseController(DynamicPath):
     def __init__(self, sprite, scene, x, y):
@@ -139,6 +138,14 @@ def demo(screen):
     screen.play([Scene(effects, 500)])
 
 if __name__ == "__main__":
+    while True:
+        try:
+            Screen.wrapper(demo)
+            sys.exit(0)
+        except ResizeScreenError:
+            pass
+
+def start():
     while True:
         try:
             Screen.wrapper(demo)

@@ -1,6 +1,6 @@
 import pytest
 import sys
-sys.path.append('../src')
+sys.path.append('../src/tictactai/')
 from board import *
 
 board = None

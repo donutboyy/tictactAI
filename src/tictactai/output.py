@@ -6,15 +6,15 @@ from asciimatics.screen import Screen
 from asciimatics.exceptions import ResizeScreenError
 from asciimatics.paths import DynamicPath
 from asciimatics.event import KeyboardEvent, MouseEvent
-import evaluator
-from game import *
-import ai_player
+from .game import *
+from .ai_player import *
 
 symbol_placer = None
 current_turn = 0
 bigBoxLength = 0
+pvp = False
 
-game = Game(playerO = ai_player.AI_Player())
+game = None
 
 class MouseController(DynamicPath):
     def __init__(self, sprite, scene, x, y):
@@ -46,7 +46,7 @@ class SymbolPlacer(Sprite):
             colour=Screen.COLOUR_RED)
 
     def place_symbol(self):
-        global board_vals
+        global pvp
 
         if game.get_game_over():
             return
@@ -62,32 +62,26 @@ class SymbolPlacer(Sprite):
         if x > boxOriginX and x < boxOriginX + bigBoxLength * 2:
             if x < int(boxOriginX + bigBoxLength / 3 * 2):
                 this_turn_board_col = 0
-                symbolX = int(boxOriginX + bigBoxLength / 6 * 2)
             elif x > int(boxOriginX + bigBoxLength * 2 / 3 * 2):
                 this_turn_board_col = 2
-                symbolX = int(boxOriginX + bigBoxLength * 5 / 6 * 2)
             else:
                 this_turn_board_col = 1
-                symbolX = int(boxOriginX + bigBoxLength / 2 * 2)
         else:
             validPos = False
         
         if y > boxOriginY and y < boxOriginY + bigBoxLength:
             if y < int(boxOriginY + bigBoxLength / 3):
                 this_turn_board_row = 0
-                symbolY = int(boxOriginY + bigBoxLength / 6)
             elif y > int(boxOriginY + bigBoxLength * 2 / 3):
                 this_turn_board_row = 2
-                symbolY = int(boxOriginY + bigBoxLength * 5 / 6)
             else:
                 this_turn_board_row = 1
-                symbolY = int(boxOriginY + bigBoxLength / 2)
         else:
             validPos = False
 
         selected_square = 3 * (this_turn_board_row) + this_turn_board_col
         if validPos and game.player_turn(selected_square):
-            if not game.get_game_over():
+            if not game.get_game_over() and not pvp:
                 game.ai_player_turn()
 
             self.print_board()
@@ -129,9 +123,6 @@ class SymbolPlacer(Sprite):
         
         
 
-        
-
-
 def demo(screen):
     global symbol_placer, bigBoxLength
     symbol_placer = SymbolPlacer(screen)
@@ -141,13 +132,24 @@ def demo(screen):
             Box(bigBoxLength * 2, bigBoxLength),
             int(bigBoxLength / 8)),
         Print(screen,
-            FigletText("tic tac toe"),
+            FigletText("tictactAI"),
             int(bigBoxLength * 9 / 8)),
         symbol_placer
     ]
     screen.play([Scene(effects, 500)])
 
 if __name__ == "__main__":
+    while True:
+        try:
+            Screen.wrapper(demo)
+            sys.exit(0)
+        except ResizeScreenError:
+            pass
+
+def start(isPvp):
+    global pvp, game 
+    pvp = isPvp
+    game = Game(playerO = AI_Player()) if not pvp else Game()
     while True:
         try:
             Screen.wrapper(demo)

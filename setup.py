@@ -14,6 +14,7 @@ setup(
     author='Daniel Ng',
     author_email='dndanielng@gmail.com',
     url='https://github.com/donutboy929/tictactAI',
+    download_url='https://github.com/donutboy929/tictactAI/archive/refs/tags/v1.0.tar.gz',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob('*.py')],

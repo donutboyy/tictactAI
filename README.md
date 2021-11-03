@@ -1,2 +1,3 @@
-# tictactAI
-tic tac toe AI implemented with minimax algorithm
+# tictactAI tests
+
+Checkout this branch to run tests

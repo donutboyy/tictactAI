@@ -47,7 +47,6 @@ setup(
         'py==1.10.0',
         'pyfiglet==0.8.post1',
         'pyparsing==3.0.3',
-        'pytest==6.2.5',
         'toml==0.10.2',
         'wcwidth==0.2.5',
         'importlib-metadata',

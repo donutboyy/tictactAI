@@ -12,9 +12,10 @@ readme.close()
 
 setup(
     name='tictactai',
-    version='1.0',
+    version='1.0.8',
     license='MIT',
     long_description=README_TEXT,
+    long_description_content_type='text/markdown',
     description='Play tic tac toe with an AI',
     author='Daniel Ng',
     author_email='dndanielng@gmail.com',

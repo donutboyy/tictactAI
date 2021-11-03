@@ -23,3 +23,5 @@ tictactai --pvp
 Start the game and make subsequent moves by clicking on an empty position on the board.
 
 Expanding the terminal/cmd window may be needed for optimal performance.
+
+To end the game, type `x` or `q`.

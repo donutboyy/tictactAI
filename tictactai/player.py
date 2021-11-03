@@ -1,5 +1,3 @@
-from tictactai.board import *
-
 class Player():
     def __init__(self, symbol="X"):
         self.__symbol = symbol

@@ -1,13 +1,13 @@
 import sys
-from asciimatics.effects import Background, Cycle, Stars, Print, Sprite
-from asciimatics.renderers import FigletText, Box, StaticRenderer, SpeechBubble
+from asciimatics.effects import Print, Sprite
+from asciimatics.renderers import FigletText, Box, StaticRenderer
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
 from asciimatics.exceptions import ResizeScreenError
 from asciimatics.paths import DynamicPath
-from asciimatics.event import KeyboardEvent, MouseEvent
-from tictactai.game import *
-from tictactai.ai_player import *
+from asciimatics.event import MouseEvent
+from tictactai.game import Game
+from tictactai.ai_player import AI_Player
 
 symbol_placer = None
 current_turn = 0
@@ -52,7 +52,6 @@ class SymbolPlacer(Sprite):
             return
 
         x, y = self._path.next_pos()
-        symbolX, symbolY = 0, 0
         boxOriginX = int(self._screen.width / 2 - bigBoxLength / 2 * 2)
         boxOriginY = int(self._screen.height / 2 - bigBoxLength / 2)
         validPos = True

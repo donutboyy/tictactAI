@@ -1,6 +1,7 @@
-from tictactai.player import *
-from tictactai.ai_player import *
-from tictactai.evaluator import *
+from tictactai.player import Player
+from tictactai.ai_player import AI_Player
+from tictactai.evaluator import has_winner, has_draw, get_winner
+from tictactai.board import Board
 
 class Game():
     def __init__(self, playerX=Player("X"), playerO=Player("O")):
@@ -30,7 +31,7 @@ class Game():
     def ai_player_turn(self) -> int:
         if not self.__game_over:
             self.__current_player = self.playerX if self.__turn_counter % 2 == 0 else self.playerO
-            bestMove = self.playerO.place_symbol_on_board(self.board)
+            bestMove = self.playerO.place_symbol_on_board_ai(self.board)
             self.__turn_counter += 1
             self.__game_over = has_winner(self.board.view_board()) or has_draw(self.board.view_board())
             return bestMove

@@ -6,8 +6,8 @@ from asciimatics.screen import Screen
 from asciimatics.exceptions import ResizeScreenError
 from asciimatics.paths import DynamicPath
 from asciimatics.event import KeyboardEvent, MouseEvent
-from .game import *
-from .ai_player import *
+from tictactai.game import *
+from tictactai.ai_player import *
 
 symbol_placer = None
 current_turn = 0

@@ -1,6 +1,6 @@
-from .player import *
-from .ai_player import *
-from .evaluator import *
+from tictactai.player import *
+from tictactai.ai_player import *
+from tictactai.evaluator import *
 
 class Game():
     def __init__(self, playerX=Player("X"), playerO=Player("O")):

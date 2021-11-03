@@ -1,5 +1,5 @@
-from .player import *
-from .evaluator import *
+from tictactai.player import *
+from tictactai.evaluator import *
 
 class AI_Player(Player):
     def __init__(self, symbol="O"):

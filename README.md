@@ -1,2 +1,10 @@
 # tictactAI
-tic tac toe AI implemented with minimax algorithm
+
+Tic tac toe AI you can play against within the shell. Implemented with minimax algorithm.
+
+
+## Installation
+
+```
+pip install tictactai
+```

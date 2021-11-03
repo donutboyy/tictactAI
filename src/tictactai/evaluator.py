@@ -1,4 +1,6 @@
-from tictactai.board import *
+import sys
+sys.path.append('../src')
+from .board import *
 
 def get_winner(board) -> str:
     row_winner = check_row_win(board)

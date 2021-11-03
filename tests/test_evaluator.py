@@ -1,6 +1,8 @@
-from tictactai.board import *
-from tictactai import evaluator
 import pytest
+import sys
+sys.path.append('../src/tictactai/')
+import evaluator
+from board import *
 
 board = None
 

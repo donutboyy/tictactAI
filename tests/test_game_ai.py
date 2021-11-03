@@ -1,7 +1,7 @@
-from tictactai.board import *
-from tictactai.player import *
-from tictactai.ai_player import *
-from tictactai.game import *
+from board import *
+from player import *
+from ai_player import *
+from game import *
 import pytest
 import sys
 sys.path.append('../src/tictactai/')

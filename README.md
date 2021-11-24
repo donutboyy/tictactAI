@@ -1,5 +1,7 @@
 # tictactAI
 
+[![PyPI version](https://badge.fury.io/py/tictactai.svg)](https://badge.fury.io/py/tictactai)
+
 Play against a tic tac toe AI in the shell, implemented with the minimax algorithm.
 
 ## Installation

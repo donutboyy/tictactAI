@@ -43,7 +43,7 @@ setup(
         'future==0.18.2',
         'iniconfig==1.1.1',
         'packaging==21.0',
-        'Pillow==9.0.0',
+        'Pillow==9.0.1',
         'pluggy==1.0.0',
         'py==1.10.0',
         'pyfiglet==0.8.post1',

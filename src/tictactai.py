@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../src')
 import click
 from src.output import *
 

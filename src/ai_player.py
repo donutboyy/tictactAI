@@ -3,8 +3,8 @@ from src.evaluator import *
 
 class AI_Player(Player):
     def __init__(self, symbol="O"):
-        super().__init__(self)
         self.__symbol = symbol
+        super().__init__(self.__symbol)
 
     def place_symbol_on_board(self, board) -> int:
         bestMove = get_best_move(board, False)

@@ -1,5 +1,5 @@
 import click
-from .output import *
+from src.output import *
 
 @click.command()
 @click.option('--pvp/--ai', default=False, help='Play vs a player or AI')

@@ -1,10 +1,8 @@
 import pytest
-import sys
-sys.path.append('../src/tictactai/')
-import evaluator
-from board import *
+import src.evaluator as evaluator
+from src.board import *
 
-board = None
+board : Board
 
 @pytest.fixture(autouse=True)
 def test_init():

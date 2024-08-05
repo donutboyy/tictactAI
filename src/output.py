@@ -1,13 +1,13 @@
 import sys
-from asciimatics.effects import Background, Cycle, Stars, Print, Sprite
-from asciimatics.renderers import FigletText, Box, StaticRenderer, SpeechBubble
+from asciimatics.effects import Print, Sprite
+from asciimatics.renderers import FigletText, Box, StaticRenderer
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
 from asciimatics.exceptions import ResizeScreenError
 from asciimatics.paths import DynamicPath
-from asciimatics.event import KeyboardEvent, MouseEvent
-from .game import *
-from .ai_player import *
+from asciimatics.event import MouseEvent
+from src.game import *
+from src.ai_player import *
 
 symbol_placer = None
 current_turn = 0

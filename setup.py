@@ -40,21 +40,26 @@ setup(
         'Click',
         'asciimatics==1.13.0',
         'attrs==21.2.0',
-        'future==0.18.2',
+        'future==0.18.3',
         'iniconfig==1.1.1',
         'packaging==21.0',
-        'Pillow==10.0.1',
+        'Pillow==10.3.0',
         'pluggy==1.0.0',
         'py==1.10.0',
         'pyfiglet==0.8.post1',
-        'pyparsing==3.0.3',
-        'pytest==6.2.5',
+        'pyparsing==3.1.2',
         'toml==0.10.2',
         'wcwidth==0.2.5',
         'importlib-metadata',
         'typing-extensions',
         'zipp',
-    ],entry_points='''
+    ],
+    extras_require={
+        'dev': [
+            'pytest==7.2.0',
+        ]
+    },
+    entry_points='''
         [console_scripts]
         tictactai=tictactai.tictactai:cli
     '''

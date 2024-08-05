@@ -1,5 +1,5 @@
-from .player import *
-from .evaluator import *
+from src.player import *
+from src.evaluator import *
 
 class AI_Player(Player):
     def __init__(self, symbol="O"):

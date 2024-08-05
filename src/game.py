@@ -1,6 +1,6 @@
-from .player import *
-from .ai_player import *
-from .evaluator import *
+from src.player import *
+from src.ai_player import *
+from src.evaluator import *
 
 class Game():
     def __init__(self, playerX=Player("X"), playerO=Player("O")):

@@ -1,12 +1,10 @@
-from board import *
-from player import *
-from ai_player import *
-from game import *
+from src.board import *
+from src.player import *
+from src.ai_player import *
+from src.game import *
 import pytest
-import sys
-sys.path.append('../src/tictactai/')
 
-game = None
+game : Game
 
 @pytest.fixture(autouse=True)
 def test_init():

@@ -2,6 +2,8 @@
 
 [![PyPI version](https://badge.fury.io/py/tictactai.svg)](https://badge.fury.io/py/tictactai)
 
+⚠️ This project was archived on 2026-05-28. No new features will be developed. 
+
 Play against a tic tac toe AI in the shell, implemented with the minimax algorithm.
 
 ## Installation
